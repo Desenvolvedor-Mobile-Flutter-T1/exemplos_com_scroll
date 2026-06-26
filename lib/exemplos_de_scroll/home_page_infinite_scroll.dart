@@ -51,12 +51,12 @@ class _HomePageInfiniteScrollState extends State<HomePageInfiniteScroll> {
     return Scaffold(
       appBar: AppBar(backgroundColor: const Color.fromARGB(255, 43, 75, 44)),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_downward),
+        child: Icon(Icons.arrow_upward),
         onPressed: () {
           controller.position.animateTo(
             //Recurso pra ir de uma posição pra outra do scroll com animação
             //No código aqui ele vai pro final da lista, se ao invés de max colocasse min ele iria para o começo
-            controller.position.maxScrollExtent,
+            controller.position.minScrollExtent,
             duration: Duration(milliseconds: 500),
             curve: Curves.decelerate,
           );
@@ -72,17 +72,25 @@ class _HomePageInfiniteScrollState extends State<HomePageInfiniteScroll> {
                 Expanded(
                   //Entre uma Column / Row e um item de scroll precisa ter algum elemento que dite o tamanho máximo para o filho
                   //No caso aqui, o expanded olha pro Column, recebe a altura da tela e passa para o ListView
-                  child: ListView.builder(
-                    controller: controller,
-                    itemCount: numeros.length, //Quantidade de itens na lista
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: .all(4),
-                        height: 40,
-                        color: Colors.lightBlueAccent,
-                        child: Text(numeros[index]),
-                      );
-                    },
+                  child: Scrollbar(
+                    controller: controller,   
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    interactive: true,
+                    thickness: 20,
+                    child: ListView.builder(
+                      controller: controller,
+                      itemCount: numeros.length, //Quantidade de itens na lista
+                      itemBuilder: (context, index) {
+                        return Container(
+                          color: index % 2 == 0
+                              ? const Color.fromARGB(255, 218, 209, 209)
+                              : Colors.greenAccent,
+                          margin: .all(4),
+                          child: ListTile(title: Text(numeros[index])),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
