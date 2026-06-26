@@ -1,0 +1,6 @@
+-- Transformar dados em entidade
+-- Passar dados pelas camadas (MVVM)
+-- Mostrar produtos na tela (usar listTile): Atributos principais: nome, preço (formato br), atributo secundário: categoria.
+-- Usar lazy loading
+-- Adicionar uma barra de pesquisa que filtre a lista ao digitar, deverá filtrar pelo atributos "nome" ou "categoria".
+-- Adicionar botão de "limpar" na barra de pesquisa, ao limpar deverá resetar a lista ao estado sem filtro e limpar a barra de pesquisa
